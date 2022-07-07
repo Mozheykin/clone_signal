@@ -1,4 +1,5 @@
 from pathlib import Path
+from sql import Transaction
 
 
 class Saver:
@@ -9,5 +10,8 @@ class Saver:
         raise NotImplemented
 
 class SaveTextFile(Saver):
-    def save(self, data: str) -> None:
-        Path(self.name).write_text(data=data)
+    def save(self, data: Transaction) -> None:
+        with open(self.name, 'w') as file:
+            for line in [*data]:
+                file.write(f'{line}\n')
+        # Path(self.name).write_text(data=data)

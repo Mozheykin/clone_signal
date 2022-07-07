@@ -4,6 +4,7 @@ import config
 import uvloop
 import formater
 import sql
+from save_signal import SaveTextFile
 
 
 
@@ -17,11 +18,15 @@ app = Client('clone_signal', api_id=config.api_id, api_hash=config.api_hash)
 
 
 @app.on_message(filters.chat(config.chanel))
-async def get_message(message):
+async def get_message(client, message):
     get_transaction = formater.format_message(id=message.id, message=message.text)
     db = sql.SQL('db.sqlite')
     if get_transaction:
-        db.add(get_=get_transaction)
+        if db.find(get_=get_transaction) is None:
+            db.add(get_=get_transaction)
+            MT_file = SaveTextFile('Signal')
+            MT_file.save(get_transaction)
+
 
     ### Formater and send BD, Save file
 

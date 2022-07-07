@@ -44,3 +44,7 @@ class SQL:
     def find(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
             return self.cursor.execute('SELECT * FROM main WHERE `id`=? ', (get_.id_,)).fetchone()
+    
+    def close(self):
+        self.db.commit()
+        self.cursor.close()
