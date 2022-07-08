@@ -4,7 +4,7 @@ import config
 import uvloop
 import formater
 import sql
-from save_signal import SaveTextFile
+from save_signal import SaveCSVfile
 
 
 
@@ -24,11 +24,8 @@ async def get_message(client, message):
     if get_transaction:
         if db.find(get_=get_transaction) is None:
             db.add(get_=get_transaction)
-            MT_file = SaveTextFile('Signal')
+            MT_file = SaveCSVfile('Signal.csv')
             MT_file.save(get_transaction)
-
-
-    ### Formater and send BD, Save file
 
 
 

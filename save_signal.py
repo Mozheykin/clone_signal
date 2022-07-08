@@ -1,5 +1,6 @@
 from pathlib import Path
 from sql import Transaction
+import csv
 
 
 class Saver:
@@ -15,3 +16,12 @@ class SaveTextFile(Saver):
             for line in [*data]:
                 file.write(f'{line}\n')
         # Path(self.name).write_text(data=data)
+
+
+
+class SaveCSVfile(Saver):
+    def save(self, data: Transaction) -> None:
+        with open(self.name, 'w', newline='') as file:
+            csv_writer = csv.writer(file, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            csv_writer.writerow([*data])
+            print(f'Save file {data}')

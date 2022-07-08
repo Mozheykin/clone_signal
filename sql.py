@@ -11,6 +11,7 @@ class Transaction(NamedTuple):
     SL: float
     TP: float
     Risk: float
+    Update: str
 
 
 class SQL:
@@ -25,13 +26,14 @@ class SQL:
                                 `CMP` REAL,
                                 `SL` REAL,
                                 `TP` REAL,
-                                `Risk` REAL)""")
+                                `Risk` REAL,
+                                `Update` TEXT)""")
                                 
         self.db.commit()
     
     def add(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
-            return self.cursor.execute('INSERT INTO main VALUES(?,?,?,?,?,?,?,?)', (*get_,))
+            return self.cursor.execute('INSERT INTO main VALUES(?,?,?,?,?,?,?,?,?)', (*get_,))
     
     def update_sl(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
