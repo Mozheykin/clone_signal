@@ -1,0 +1,46 @@
+Hello!
+Hello, in this video I'll show you how to install and use the program.
+First of all, copy the github repository
+		git clone https://github.com/Mozheykin/clone_signal.git
+
+MT4 expert in (clone_signal.ex4, clone_signal.mq4) MQL4/Experts/
+
+All other files are transferred to the folder MQL4/Files/
+To run, install the dependencies with the command
+			pip install requirements.txt -r
+
+Authorize your telegram
+		https://my.telegram.org/apps
+
+enter your data in the configuration file
+	We introduce them instead of env.api_id
+
+	for example
+
+		api_id = 123123123
+		api_hash = '1233123hfd34jdmnvncc21'
+		This is how they look
+		save
+
+We find out the necessary channel in order to receive signals from it.
+
+copy the channel number and since it is private, add -100 in front of the number
+-1001621419348
+
+
+next start programm, go in terminal, go dirrectory programm, and use command:
+		python3 clone_signal.py
+
+Programm start.
+
+Next go Metatrader4, and start expert.
+
+I'm use tester for example you work this script
+1) Buy order
+2) Sell order sorry send Buy order, then close he (But he don't open when errors TP and SL in order) This error # 131 order
+3) Sell order Opening
+4) Change order SL good
+5) Change order TP good
+6) Close order good
+
+

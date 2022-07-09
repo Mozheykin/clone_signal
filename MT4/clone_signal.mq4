@@ -120,6 +120,8 @@ void OnTick()
               {
                if(Where == "SL")
                   OrderModify(OrderTicket(), OrderOpenPrice(), Update, OrderTakeProfit(), 0, clrYellow);
+               if(Where == "TP")
+                  OrderModify(OrderTicket(), OrderOpenPrice(), OrderStopLoss(), Update, 0, clrYellow);
               }
      }
 
