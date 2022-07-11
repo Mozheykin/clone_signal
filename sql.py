@@ -9,7 +9,10 @@ class Transaction(NamedTuple):
     Emmet:str
     CMP:float
     SL: float
-    TP: float
+    TP1: float
+    TP2: float
+    TP3: float
+    TP4: float
     Risk: float
     Update: str
 
@@ -25,7 +28,10 @@ class SQL:
                                 `Emmet` TEXT,
                                 `CMP` REAL,
                                 `SL` REAL,
-                                `TP` REAL,
+                                `TP1` REAL,
+                                `TP2` REAL,
+                                `TP3` REAL,
+                                `TP4` REAL,
                                 `Risk` REAL,
                                 `Update` TEXT)""")
                                 
@@ -33,7 +39,7 @@ class SQL:
     
     def add(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
-            return self.cursor.execute('INSERT INTO main VALUES(?,?,?,?,?,?,?,?,?)', (*get_,))
+            return self.cursor.execute('INSERT INTO main VALUES(?,?,?,?,?,?,?,?,?,?,?,?)', (*get_,))
     
     def update_sl(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
@@ -41,7 +47,7 @@ class SQL:
     
     def update_tp(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
-            return self.cursor.execute('UPDATE main SET `SL`=? where `id`=?', (get_.TP, get_.id_))
+            return self.cursor.execute('UPDATE main SET `SL`=? where `id`=?', (get_.TP1, get_.id_))
     
     def find(self, get_: Transaction) -> sqlite3.Cursor | None:
         with self.db:
