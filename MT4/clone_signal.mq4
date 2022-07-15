@@ -101,7 +101,7 @@ void Reopen()
             double lot = OrderLots();
             //Comment(check_ticket(comment), check_open_order(comment));
             
-            if((OrderMagicNumber() == magik_number) && (check_ticket(comment) == False) && (check_open_order(comment) == False))
+            if((OrderMagicNumber() == magik_number)&& (StringFind(str, "[sl]") == True) && (check_ticket(comment) == False) && (check_open_order(comment) == False))
               {
                //Comment(OrderType());
                if(OrderType() == OP_BUY)
@@ -203,8 +203,20 @@ void OnTick()
    if(Order == "SELL" && Where == "NOW")
      {
       double Lot=((Risk*AccountBalance())/100)/((SL - Bid)/Point);
+      if (TP4 == 0)
+      {
+         if (TP3 == 0)
+         {
+            if (TP2 != 0)
+               Lot = Lot/2;
+         }
+         else
+            Lot = Lot/3;
+      }
+      else
+         Lot = Lot/4;  
       if(Lot < MinLot)
-         Lot = MinLot;
+         Lot = MinLot; 
       int ticket=OrderSend(Emmet,OP_SELL, Lot, Bid, 3, SL, TP1,CMP, magik_number,0,clrRed);
       double distance_SL = NormalizeDouble(SL - Bid, Digits);
       if(ticket<0)
