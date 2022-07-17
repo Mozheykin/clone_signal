@@ -179,8 +179,20 @@ void OnTick()
    if(Order == "BUY" && Where == "NOW")
      {
       double Lot=((Risk*AccountBalance())/100)/((Ask - SL)/Point);
+      if (TP4 == 0)
+      {
+         if (TP3 == 0)
+         {
+            if (TP2 != 0)
+               Lot = Lot/2;
+         }
+         else
+            Lot = Lot/3;
+      }
+      else
+         Lot = Lot/4;  
       if(Lot < MinLot)
-         Lot = MinLot;
+         Lot = MinLot; 
       int ticket=OrderSend(Emmet,OP_BUY, Lot, Ask, 3, SL, TP1, CMP, magik_number,0,clrBlue);
       double distance_SL = NormalizeDouble(Ask - SL, Digits);
       if(ticket<0)
